@@ -32,13 +32,13 @@ Power the RPis up, connect the Ethernet cable, and enable network sharing on you
 2. Type in `yes` and the password.
 3. `sudo nano /etc/dhcpcd.conf`
 4. Scroll down untill you see '# Example static IP configuration :' section, and replace the content with
-```
-   interface eth0
-   static ip_address=192.168.3.xxx/24
-   static routers=192.168.3.1
-   static domain_name_servers=192.168.3.1 8.8.8.8
-```
-⋅⋅⋅The "xxx" stands for the last three digits of the static IP address, which can be found in the table above.
+   ```
+      interface eth0
+      static ip_address=192.168.3.xxx/24
+      static routers=192.168.3.1
+      static domain_name_servers=192.168.3.1 8.8.8.8
+   ```
+   The "xxx" stands for the last three digits of the static IP address, which can be found in the table above.
 5. Click Ctrl+O followed by Ctrl+X to save the changes and exit.
 6. `sudo reboot`
 7. Try ssh using the configured static ip address with `ssh [username]@[ip address]`
