@@ -312,6 +312,31 @@ rdd = sc.parallelize([1,2,3,4,5])
 rdd.reduce(lambda a, b: a+b)
 ~~~
 
+6. installing JupyterLab in rpi0
+- install it in an isolated environment:
+~~~bash
+sudo apt-get update
+sudo apt-get upgrade -y
+python3 -m venv myjupyterenv
+source myjupyterenv/bin/activate
+pip install jupyterlab
+~~~
+-configure PySpark to work with JupyterLab:
+~~~bash
+nano ~/.bashrc
+export PYSPARK_DRIVER_PYTHON=jupyter
+export PYSPARK_DRIVER_PYTHON_OPTS='lab'
+source ~/.bashrc
+~~~
+-start JupyterLab.
+~~~bash
+source myjupyterenv/bin/activate
+jupyter lab --ip=192.168.1.114
+~~~
+and then you would get an URL which you can use to open the JupyterLab.
+
+
+
 ## HIVE installation
 1. download and install in all the nodes:
 ~~~bash
