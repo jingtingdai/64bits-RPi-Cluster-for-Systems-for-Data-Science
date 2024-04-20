@@ -1,7 +1,6 @@
 
 ## Classwork 9
 
-**Will be done interactively in class.**
 
 For this classwork exercise, we use Kafka, which is a platform for streaming events. Streams of
 events are organized around topics, which can be seen as message queues or containers for a certain
@@ -79,7 +78,7 @@ You are now ready to start the actual exercises.
 
     - On OLAT, there are two folders (compressed in a zip-file) with Python files for accessing Kafka. The one named `kafka_example` contains a small example for a temperature data processing pipeline where there is only one producer/consumer pair. The producer writes the input data line by line as events into the topic `temperature`, the consumer subscribes the topic and and, in turn, passes the messages through three operators (converting the temperature value from Celsius to Fahrenheit, adding some noise, and finally rounding the value).
 
-        In order to run the Python code, first make sure your Zookeeper and Kafka are up and running, then open two consoles and run both scripts (start the consumer first). You can the observe the producer and consumer process the individual messages.
+        In order to run the Python code, first make sure your Zookeeper and Kafka are up and running, then open two consoles and run both scripts (start the consumer first). You can then observe the producer and consumer process the individual messages.
 
     - The `kafka_chaining` folder has more than one pair of producers and consumers. It is still a temperature processing pipeline with similar operators as in the kafka example folder. However, this time you are building a more complex structure: the temperatures are converted from Celsius to Fahrenheit, then filtered by a threshold, after which the events are split into two streams, one stream is passed through EWMA and another through Avg. We provide example code for one stateless operator(`celsius_to_fahrenheit`), one stateful operator (EWMA), and one output consumer of EWMA. Your task is to fill in/replace code to make this work. Currently, there is some placeholder code that just passes through the events without processing them. In particular, you should finish another stateless operator, stateful operator, and output consumer of moving average.
 
