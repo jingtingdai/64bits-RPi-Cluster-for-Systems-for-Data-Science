@@ -59,7 +59,7 @@ hdfs dfs -put ml-20m /data/
 
     spark = SparkSession.builder \
         .master("spark://rpi0:7077") \
-        .appName("MyApp") \
+        .appName("MovieLens") \
         .getOrCreate()
     sc = spark.sparkContext
     ```
