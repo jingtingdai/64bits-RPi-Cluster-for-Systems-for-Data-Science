@@ -9,7 +9,7 @@ sudo mv apache-zookeeper-3.8.4-bin /opt/zookeeper
 2. configuration.
     - zoo.cfg
     ~~~bash
-    sudo mkdir -p /opt/zookeeper/data
+    mkdir -p /opt/zookeeper/data
     cd /opt/zookeeper/conf
     cp zoo_sample.cfg zoo.cfg
     nano zoo.cfg
