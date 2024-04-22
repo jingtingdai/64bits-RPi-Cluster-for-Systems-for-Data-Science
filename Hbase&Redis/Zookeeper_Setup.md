@@ -1,9 +1,9 @@
 ## ZOOKEEPER installation
 1. download and install zookeeper in each node.
 ~~~bash
-wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.3/apache-zookeeper-3.8.3-bin.tar.gz
-tar -zxzf apache-zookeeper-3.8.3-bin.tar.gz
-sudo mv apache-zookeeper-3.8.3-bin /opt/zookeeper
+wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.4/apache-zookeeper-3.8.4-bin.tar.gz
+tar -zxzf apache-zookeeper-3.8.4-bin.tar.gz
+sudo mv apache-zookeeper-3.8.4-bin /opt/zookeeper
 ~~~
 
 2. configuration.
