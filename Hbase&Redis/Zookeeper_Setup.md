@@ -35,6 +35,6 @@ sudo mv apache-zookeeper-3.8.4-bin /opt/zookeeper
 3. start zookeeper.
 ~~~bash
 cd /opt/zookeeper/bin
-sudo ./zkServer.sh start
+./zkServer.sh start
 ./zkServer.sh status
 ~~~
