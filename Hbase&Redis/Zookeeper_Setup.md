@@ -10,18 +10,21 @@ sudo mv apache-zookeeper-3.8.4-bin /opt/zookeeper
     - zoo.cfg
     ~~~bash
     mkdir -p /opt/zookeeper/data
+    
     cd /opt/zookeeper/conf
     cp zoo_sample.cfg zoo.cfg
     nano zoo.cfg
     dataDir=/opt/zookeeper/data
     clientPort=2181
-    #initLimit=5
-    #syncLimit=2
+    initLimit=10
+    syncLimit=5
+    tickTime=2000
     server.1=rpi0:2888:3888
     server.2=rpi1:2888:3888
     server.3=rpi2:2888:3888
     server.4=rpi3:2888:3888
     ~~~
+    replace rpi0,rpi1,rpi2,rpi3 with 0.0.0.0 in each node
 
     - myid
     ~~~bash
