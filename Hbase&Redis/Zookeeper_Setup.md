@@ -14,7 +14,7 @@ sudo mv apache-zookeeper-3.8.4-bin /opt/zookeeper
     cp zoo_sample.cfg zoo.cfg
     nano zoo.cfg
     dataDir=/opt/zookeeper/data
-    #clientPort=2181
+    clientPort=2181
     #initLimit=5
     #syncLimit=2
     server.1=rpi0:2888:3888
@@ -32,6 +32,6 @@ sudo mv apache-zookeeper-3.8.4-bin /opt/zookeeper
 3. start zookeeper.
 ~~~bash
 cd /opt/zookeeper/bin
-./zkServer.sh start
+sudo ./zkServer.sh start
 ./zkServer.sh status
 ~~~
