@@ -1,9 +1,9 @@
 ## HBASE installation
 1. download and extract hbase in all the nodes.
 ~~~bash
-wget https://dlcdn.apache.org/hbase/2.5.7/hbase-2.5.7-bin.tar.gz
-tar -zxvf hbase-2.5.7-bin.tar.gz
-sudo mv hbase-2.5.7 /opt/hbase
+wget https://dlcdn.apache.org/hbase/2.5.8/hbase-2.5.8-hadoop3-bin.tar.gz
+tar -zxvf hbase-2.5.8-hadoop3-bin.tar.gz
+sudo mv hbase-2.5.8-hadoop3 /opt/hbase
 ~~~
 
 2. configuration in rpi0.
