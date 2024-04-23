@@ -174,6 +174,14 @@ export HADOOP_LOG_DIR=${HADOOP_HOME}/logs
         <name>yarn.nodemanager.log-dirs</name>
         <value>/opt/Hadoop/logs</value>
       </property>
+      <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+      </property>
+      <property>
+        <name>yarn.nodemanager.aux-services.mapreduce_shuffle.class</name>
+        <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+      </property>
     ~~~
 
 - workers (only set in rpi0):
