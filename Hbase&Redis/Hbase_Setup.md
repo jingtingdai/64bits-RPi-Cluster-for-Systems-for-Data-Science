@@ -65,9 +65,12 @@ pi@rpi3
 ~~~bash
 nano hbase-env.sh
 export JAVA_HOME=/usr/lib/jvm/jdk-11.0.21+9
+export HADOOP_HOME=/opt/Hadoop
+export HBASE_CLASSPATH=/opt/Hadoop/etc/hadoop
+export HBASE_MANAGES_ZK=false
 ~~~
 
-- set environment variables
+- set environment variables (also need to be configured in rpi1/2/3)
 ~~~bash
 nano ~/.bashrc
 export HBASE_HOME=/opt/hbase
@@ -75,7 +78,9 @@ export PATH=$PATH:$HBASE_HOME/bin
 source ~/.bashrc
 ~~~
 
-3. start hbase.
+- substitute all the jar package start with 'hadoop' in /opt/hbase/lib with the corresponding one which is in different version in /opt/Hadoop.
+
+3. start hbase. Remember to start zookeeper before start hbase.
 ~~~bash
 cd /opt/hbase/bin
 ./start-hbase.sh
