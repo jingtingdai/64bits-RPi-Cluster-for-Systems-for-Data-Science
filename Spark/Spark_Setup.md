@@ -20,7 +20,7 @@ source ~/.bashrc
     ~~~bash
     cd /opt/spark/conf
     cp spark-defaults.conf.template spark-defaults.conf
-    sudo nano spark-defaults.conf
+    nano spark-defaults.conf
     spark.master                     spark://rpi0:7077
     spark.eventLog.enabled           true
     spark.eventLog.dir               hdfs://rpi0:8020/sparkEventLog
@@ -34,7 +34,7 @@ source ~/.bashrc
     - spark-env.sh
     ~~~bash
     cp spark-env.sh.template spark-env.sh
-    sudo nano spark-env.sh
+    nano spark-env.sh
     export SPARK_MASTER_HOST=rpi0
     export JAVA_HOME=/usr/lib/jvm/jdk-11.0.21+9
     ~~~
@@ -42,7 +42,7 @@ source ~/.bashrc
     - workers
     ~~~bash
     cp workers.template workers
-    sudo nano workers
+    nano workers
     pi@rpi1
     pi@rpi2
     pi@rpi3
