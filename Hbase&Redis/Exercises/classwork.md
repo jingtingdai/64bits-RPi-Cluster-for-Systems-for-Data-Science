@@ -130,7 +130,8 @@ You are now ready to start the actual exercises.
 
     b) Setting up the dataset:
 
-    - Download the csv file using `wget` command and check if it exists using `ls`.
+    - Download the csv file and put it to HDFS. Better download from OLAT. If you choose download from github, should check if the file is the csv file we need.
+    ```hdfs dfs -put enwiki-20200920-pages-articles-multistream_small.csv /hbase/```
 
     - Run the following command to start hbase:
     ```
@@ -154,7 +155,7 @@ You are now ready to start the actual exercises.
     page:page_title,page:page_ns,page:revision_id, \
     author:timestamp,author:contributor_id, \
     author:contributor_name,page:bytes" \
-    wiki_small enwiki-20200920-pages-articles-multistream_small.csv
+    wiki_small hdfs://rpi0:8020/hbase/enwiki-20200920-pages-articles-multistream_small.csv
     ```
 
     We need to specify which column in the csv maps to which column in the HBase table. Note that we make page id into the `HBASE_ROW_KEY`. The command will trigger a lot of (harmless) messages, mostly status updates and non-critical warnings, e.g. reporting ”Bad Lines”, which drops some lines due to illegal characters, but there is plenty of data left.
