@@ -131,7 +131,9 @@ You are now ready to start the actual exercises.
     b) Setting up the dataset:
 
     - Download the csv file and put it to HDFS. Better download from OLAT. If you choose download from github, should check if the file is the csv file we need.
-    ```hdfs dfs -put enwiki-20200920-pages-articles-multistream_small.csv /hbase/```
+    ```
+    hdfs dfs -put enwiki-20200920-pages-articles-multistream_small.csv /hbase/
+    ```
 
     - Run the following command to start hbase:
     ```
