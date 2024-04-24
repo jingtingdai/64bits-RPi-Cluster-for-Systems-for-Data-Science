@@ -57,7 +57,7 @@ You are now ready to start the actual exercises.
 
     - Consume message using consumer by running: (in another shell)
     ```
-    bin/kafka-console-consumer.sh --topic test --from-beginning --bootstrap-server rpi0:9092
+    ./kafka-console-consumer.sh --topic test --from-beginning --bootstrap-server rpi0:9092
     ```
     It will show you all the messages from the beginning until now. By omitting `--from-beginning` the consumer will only show messages from the point it was started. Anything you enter on the producer side will shortly show up on the consumer side.
 
