@@ -68,7 +68,7 @@ You are now ready to start the actual exercises.
 
 2. Use Kafka with Python:
 
-    - In order to use Kafka with Python, we need to install kafka-python using pip by running in rpi0:
+    - In order to use Kafka with Python, we need to install kafka-python in each node:
     ```
     sudo apt install python3-kafka
     ```
