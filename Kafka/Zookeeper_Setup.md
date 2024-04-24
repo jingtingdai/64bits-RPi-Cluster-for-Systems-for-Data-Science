@@ -3,7 +3,7 @@
 ~~~bash
 wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.4/apache-zookeeper-3.8.4-bin.tar.gz
 tar -zxzf apache-zookeeper-3.8.4-bin.tar.gz
-sudo mv apache-zookeeper-3.8.4-bin /opt/zookeeper
+mv apache-zookeeper-3.8.4-bin /opt/zookeeper
 ~~~
 
 2. configuration.
