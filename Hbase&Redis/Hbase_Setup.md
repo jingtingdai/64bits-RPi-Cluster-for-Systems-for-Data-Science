@@ -78,10 +78,13 @@ export PATH=$PATH:$HBASE_HOME/bin
 source ~/.bashrc
 ~~~
 
-- substitute all the jar package start with 'hadoop' in /opt/hbase/lib with the corresponding one which is in different version in /opt/Hadoop.
+- substitute all the jar package start with 'hadoop' in /opt/hbase/lib with the corresponding one which is in different version in /opt/Hadoop. For package that cannot find substitute in /opt/Hadoop, leave the original package untouched.
 
 3. start hbase. Remember to start zookeeper before start hbase.
 ~~~bash
+cd /opt/zookeeper/bin
+./zkServer.sh start
+
 cd /opt/hbase/bin
 ./start-hbase.sh
 ~~~
