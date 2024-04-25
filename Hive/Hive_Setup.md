@@ -123,24 +123,24 @@ nano hive-site.xml
     <value>false</value>
   </property>
   <property>
-	  <name>datanucleus.fixedDatastore</name>
-	  <value>true</value>
-	</property>
+    <name>datanucleus.fixedDatastore</name>
+    <value>true</value>
+  </property>
   <property>
-	  <name>datanucleus.autoStartMechanism</name> 
-	  <value>SchemaTable</value>
+    <name>datanucleus.autoStartMechanism</name> 
+    <value>SchemaTable</value>
   </property> 
   <property>
-	  <name>hive.metastore.event.db.notification.api.auth</name>
-	  <value>false</value>
+    <name>hive.metastore.event.db.notification.api.auth</name>
+    <value>false</value>
   </property>
   <property>
-	  <name>hive.metastore.uris</name>
-	  <value>thrift://rpi0:9083</value>
+    <name>hive.metastore.uris</name>
+    <value>thrift://rpi0:9083</value>
   </property>
   <property>
-	  <name>hive.server2.authentication</name>
-	  <value>NONE</value>
+    <name>hive.server2.authentication</name>
+    <value>NONE</value>
   </property>
   <property>
     <name>hive.server2.enable.doAs</name>
@@ -179,12 +179,12 @@ export HIVE_CONF_DIR=$HIVE_HOME/conf
 - core-site.xml in /opt/Hadoop/etc/hadoop, add following config (substitute 'pi' with your local user):
 ~~~bash
   <property>
-	  <name>hadoop.proxyuser.pi.hosts</name>
-	  <value>*</value>
+    <name>hadoop.proxyuser.pi.hosts</name>
+    <value>*</value>
   </property>
   <property>
-	  <name>hadoop.proxyuser.pi.groups</name>
-	  <value>*</value>
+    <name>hadoop.proxyuser.pi.groups</name>
+    <value>*</value>
   </property>
 ~~~
 
