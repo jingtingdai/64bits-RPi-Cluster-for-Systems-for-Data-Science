@@ -25,9 +25,6 @@ source ~/.bashrc
     spark.eventLog.enabled           true
     spark.eventLog.dir               hdfs://rpi0:8020/sparkEventLog
     spark.serializer                 org.apache.spark.serializer.KryoSerializer
-    spark.jars                       /opt/hive/lib/hive-exec-4.0.0-beta-1.jar,/opt/hive/lib/hive-metastore-4.0.0-beta-1.jar,/opt/hive/lib/hive-common-4.0.0-beta-1.jar,/opt/hive/lib/libthrift-0.16.0.jar,/opt/hive/lib/hive-serde-4.0.0-beta-1.jar,/opt/hive/lib/hive-service-4.0.0-beta-1.jar
-    spark.sql.warehouse.dir          /user/hive/warehouse
-    spark.hadoop.hive.metastore.uris thrift://rpi0:9083
     hdfs dfs -mkdir /sparkEventLog
     ~~~
 
@@ -47,8 +44,6 @@ source ~/.bashrc
     pi@rpi2
     pi@rpi3
     ~~~
-
-    also copy the hive-site.xml from /opt/hive/conf, and place it in /opt/spark/conf.
 
 4. start SPARK.
     - in rpi0:
@@ -96,3 +91,8 @@ rdd.reduce(lambda a, b: a+b)
     jupyter lab --ip=192.168.1.114
     ```
     and then you would get an URL which you can use to open the JupyterLab.
+
+7. After using spark, remember to stop it:
+```
+stop-all.sh
+```

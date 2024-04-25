@@ -32,7 +32,16 @@ This exercise uses Apache Spark. Similar to the previous exercise, there are two
         ```
         you can also check about Spark in `http://rpi0:8080`
 
-    You then have to run the operators in the Python shell of Spark, which you start with `pyspark --master spark://rpi0:7077` . In order to make it easier to copy/paste the commands from the Jupyter notebook into the shell, an html-version of the notebook is available. If you use this option, you can skip the set-up and configuration instructions in the notebook (and also do not need to upload the data file).
+    You then have to run the operators in the Python shell of Spark, which you start with `pyspark --master spark://rpi0:7077` . In order to make it easier to copy/paste the commands from the Jupyter notebook into the shell, an html-version of the notebook is available. If you use this option, you can skip the set-up and configuration instructions in the notebook (and also do not need to upload the data file). And if you encounter error 
+    ```
+    env:`jupyter`: No such file or directory
+    ```
+    can manually change the enviroment variables:
+    ```
+    unset export PYSPARK_DRIVER_PYTHON
+    unset PYSPARK_DRIVER_PYTHON_OPTS
+    ```
+
 
 You are now ready to do the exercise, which (again) involves running a Jupyter notebook and writing small snippets of code.
 

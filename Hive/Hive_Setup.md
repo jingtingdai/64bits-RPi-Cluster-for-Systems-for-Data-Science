@@ -1,9 +1,9 @@
 ## HIVE installation
 1. download and install in all the nodes:
 ~~~bash
-wget https://dlcdn.apache.org/hive/hive-4.0.0-beta-1/apache-hive-4.0.0-beta-1-bin.tar.gz
-tar -zxvf apache-hive-4.0.0-beta-1-bin.tar.gz
-sudo mv apache-hive-4.0.0-beta-1-bin /opt/hive
+wget https://dlcdn.apache.org/hive/hive-4.0.0/apache-hive-4.0.0-bin.tar.gz
+tar -zxvf apache-hive-4.0.0-bin.tar.gz
+sudo mv apache-hive-4.0.0-bin /opt/hive
 ~~~
 
 2. set environment variables in all the nodes:
@@ -24,7 +24,7 @@ source ~/.bashrc
     sudo systemctl start postgresql
     ~~~
 
-    2. secure the user named ‘postgres’ :
+    2. secure the user named ‘postgres’ (in rpi0):
     ~~~bash
     sudo -i -u postgres
     psql
@@ -36,7 +36,7 @@ source ~/.bashrc
     exit
     ~~~
 
-    3. configure PostgreSQL to allow remote connections from the other nodes:
+    3. configure PostgreSQL to allow remote connections from the other nodes (in rpi0):
     ~~~bash
     sudo nano /etc/postgresql/15/main/postgresql.conf
     ~~~
@@ -63,7 +63,7 @@ source ~/.bashrc
     psql -h rpi0 -U postgres -d postgres
     ~~~
 
-    5. prepare the PostgreSQL database:
+    5. prepare the PostgreSQL database (in rpi0):
     ~~~bash
     sudo -i -u postgres
     psql
@@ -74,7 +74,7 @@ source ~/.bashrc
     exit
     ~~~
 
-    6. download PostgreSQL JDBC driver and put in hive lib directory:
+    6. download PostgreSQL JDBC driver and put in hive lib directory (in rpi0):
     ~~~bash
     wget https://jdbc.postgresql.org/download/postgresql-42.7.2.jar
     mv postgresql-42.7.2.jar /opt/hive/lib
@@ -88,19 +88,19 @@ hdfs dfs -mkdir -p /tmp
 hdfs dfs -chmod g+w /tmp
 ~~~
 
-5. Lib guava - conflict issue
+5. Lib guava - conflict issue (in rpi0)
 ~~~bash
-$ rm /opt/hive/lib/guava-22.0.jar
-$ cp /opt/Hadoop/share/hadoop/common/lib/guava-27.0-jre.jar /opt/hive/lib/
+rm /opt/hive/lib/guava-22.0.jar
+cp /opt/Hadoop/share/hadoop/common/lib/guava-27.0-jre.jar /opt/hive/lib/
 cp /opt/hive/conf/hive-env.sh.template  /opt/hive/conf/hive-env.sh
 ~~~
 
-6. configure hive to use postgresql:
+6. configure hive to use postgresql (in rpi0):
 - hive-site.xml
 ~~~bash
 cd /opt/hive/conf
 touch hive-site.xml
-sudo nano hive-site.xml
+nano hive-site.xml
 <configuration>
   <property>
     <name>javax.jdo.option.ConnectionURL</name>
@@ -123,24 +123,24 @@ sudo nano hive-site.xml
     <value>false</value>
   </property>
   <property>
-	<name>datanucleus.fixedDatastore</name>
-	<value>true</value>
+	  <name>datanucleus.fixedDatastore</name>
+	  <value>true</value>
 	</property>
   <property>
-	<name>datanucleus.autoStartMechanism</name> 
-	<value>SchemaTable</value>
+	  <name>datanucleus.autoStartMechanism</name> 
+	  <value>SchemaTable</value>
   </property> 
   <property>
-	<name>hive.metastore.event.db.notification.api.auth</name>
-	<value>false</value>
+	  <name>hive.metastore.event.db.notification.api.auth</name>
+	  <value>false</value>
   </property>
   <property>
-	<name>hive.metastore.uris</name>
-	<value>thrift://rpi0:9083</value>
+	  <name>hive.metastore.uris</name>
+	  <value>thrift://rpi0:9083</value>
   </property>
   <property>
-	<name>hive.server2.authentication</name>
-	<value>NONE</value>
+	  <name>hive.server2.authentication</name>
+	  <value>NONE</value>
   </property>
   <property>
     <name>hive.server2.enable.doAs</name>
@@ -164,6 +164,10 @@ sudo nano hive-site.xml
   </property>
 </configuration>
 ~~~
+also copy the hive-site.xml to /opt/spark/conf.
+```
+cp hive-site.xml /opt/spark/conf/
+```
 
 - hive-env.sh
 ~~~bash
@@ -175,16 +179,24 @@ export HIVE_CONF_DIR=$HIVE_HOME/conf
 - core-site.xml in /opt/Hadoop/etc/hadoop, add following config (substitute 'pi' with your local user):
 ~~~bash
   <property>
-	<name>hadoop.proxyuser.pi.hosts</name>
-	<value>*</value>
+	  <name>hadoop.proxyuser.pi.hosts</name>
+	  <value>*</value>
   </property>
   <property>
-	<name>hadoop.proxyuser.pi.groups</name>
-	<value>*</value>
+	  <name>hadoop.proxyuser.pi.groups</name>
+	  <value>*</value>
   </property>
 ~~~
 
-7. Configure schema init permission:
+- add these to /opt/spark/conf/spark-defaults.conf
+```
+spark.jars                       /opt/hive/lib/hive-exec-4.0.0.jar,/opt/hive/lib/hive-metastore-4.0.0.jar,/opt/hive/lib/hive-common-4.0.0.jar,/opt/hive/lib/libthrift-0.16.0.jar,/opt/hive/lib/hive-serde-4.0.0.jar,/opt/hive/lib/hive-service-4.0.0.jar
+spark.sql.warehouse.dir          /user/hive/warehouse
+spark.hadoop.hive.metastore.uris thrift://rpi0:9083
+```
+
+
+7. Configure schema init permission (in rpi0):
 ~~~bash
 sudo -i -u postgres
 psql -U postgres -d hive_metastore
@@ -196,7 +208,7 @@ GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO hiveuser;
 GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO hiveuser;
 ~~~
 
-8. start hive.
+8. start hive (in rpi0).
 ~~~bash
 schematool -dbType postgres -initSchema
 nohup hive --service metastore &

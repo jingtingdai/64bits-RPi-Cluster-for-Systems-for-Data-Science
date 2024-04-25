@@ -1,6 +1,6 @@
 ## Model Answer 12
 
-1. -  Just run the script `hive -f line_item.hql`
+1. -  Just run the script `!run line_item.hql` in beeline (remember to substitute 'namenode' with 'rpi0').
 
     -  If the subdirectories have not been created by the hql-file, you can do so manually. First check whether the directories are there:
     ```

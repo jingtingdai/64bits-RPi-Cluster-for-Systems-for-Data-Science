@@ -46,7 +46,6 @@ For this exercise, we are using Raspberry Pi (RPi) clusters. Essentially, there 
 
 3. For this exercise, we are using the machine learning library ML of Apache Spark. Instructions on how to set up the environment are provided in the Jupyter notebook `SparkML.ipynb`: for Google Colab, on your own systems, and on Databricks. And download the csv files from OLAT and upload the files into HDFS.
 ```
-wget <fileDownloadPath>
 hdfs dfs -put diabetes.csv /data/
 hdfs dfs -put iris.csv /data/
 ```

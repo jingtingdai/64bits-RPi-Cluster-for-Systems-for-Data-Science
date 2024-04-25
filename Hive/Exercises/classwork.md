@@ -34,9 +34,9 @@ CREATE DATABASE IF NOT EXISTS testdb;
 
 4. Download the file `hive.tar.gz` from OLAT and unpack it. 
 
-5. Go to the directory `employee` and create a table `employee` in Hive:
+5. Go to the directory `employee` and create a table `employee` in beeline:
 ```
-hive -f employee_table.hql
+!run employee_table.hql
 ```
 also remember to substitute `namenode` with `rpi0` in the hql file.
 
@@ -54,11 +54,11 @@ SELECT * FROM employee;
 ```
 You can stop the interface by typing in
 ```
-EXIT;
+!exit
 ```
 
 
-You are now ready to do the exercises. Do not forget to stop the shell you started in step 2. with `EXIT;` and to shut down the Hadoop containers, once you are done with the exercises, by calling
+You are now ready to do the exercises. Do not forget to stop the shell you started in step 2. with `!exit` and to shut down the Hadoop containers, once you are done with the exercises, by calling
 ```
 cd /opt/Hadoop/sbin
 ./stop-all.sh
