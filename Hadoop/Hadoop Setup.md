@@ -158,6 +158,14 @@ export HADOOP_LOG_DIR=${HADOOP_HOME}/logs
         <name>yarn.resourcemanager.webapp.address</name>
         <value>0.0.0.0:8088</value>
       </property>
+      <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+      </property>
+      <property>
+        <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
+        <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+      </property>
     ~~~
 
     - rpi1,rpi2,rpi3: 
@@ -177,6 +185,14 @@ export HADOOP_LOG_DIR=${HADOOP_HOME}/logs
       <property>
         <name>yarn.nodemanager.log-dirs</name>
         <value>/opt/Hadoop/logs</value>
+      </property>
+      <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+      </property>
+      <property>
+        <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
+        <value>org.apache.hadoop.mapred.ShuffleHandler</value>
       </property>
     ~~~
 
@@ -200,6 +216,18 @@ pi@rpi3
   <property>
     <name>mapreduce.jobhistory.webapp.address</name>
     <value>0.0.0.0:19888</value>
+  </property>
+  <property>
+    <name>yarn.app.mapreduce.am.env</name>
+    <value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
+  </property>
+  <property>
+    <name>mapreduce.map.env</name>
+    <value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
+  </property>
+  <property>
+    <name>mapreduce.reduce.env</name>
+    <value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
   </property>
 ~~~
 
