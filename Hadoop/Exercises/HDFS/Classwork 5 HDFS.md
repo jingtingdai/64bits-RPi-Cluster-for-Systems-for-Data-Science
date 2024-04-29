@@ -31,20 +31,3 @@ Forcefully make one of the data nodes exit by using the `hdfs --daemon stop data
 What behaviour can you observe? Can you still fetch the entire `male_players.csv` file?
 
 After finishing the exercises above, don't forget to stop the HDFS daemon using `./stop-dfs.sh && ./stop-yarn.sh`.
-
-scp FIFA_Dataset.zip hadoopuser@rpi0: 
-sudo unzip FIFA_Dataset.zip
-hdfs fs -mkdir /data
-hadoop fs -copyFromLocal ~/FIFA_Dataset/female_players.csv /data
-hadoop fs -copyFromLocal ~/FIFA_Dataset/male_players.csv /data
-hdfs dfs -ls /data
-hadoop fs -setrep -w 4 /data/male_players.csv
-hadoop fs -setrep -w 2 /data/male_players.csv
-
-hdfs dfsadmin -report
-
-hdfs --daemon stop datanode
-yarn --daemon stop nodemanager
-last contact
-
-https://stackoverflow.com/questions/6019167/how-to-get-datanode-timeout
