@@ -18,8 +18,8 @@ scp <Path to File To Copy> username@hostname:<Path to File will Go>
 #From NameNode
 sudo unzip FIFA_Dataset.zip
 hadoop fs -mkdir /data
-hadoop fs -copyFromLocal ~/FIFA_Dataset/female_players.csv /data
-hadoop fs -copyFromLocal ~/FIFA_Dataset/male_players.csv /data
+hadoop fs -copyFromLocal <Path to Folder>/FIFA_Dataset/female_players.csv /data
+hadoop fs -copyFromLocal <Path to Folder>/FIFA_Dataset/male_players.csv /data
 ~~~
 Other useful options are `-ls` for listing the contents of a directory, `-rm` for removing a file, and `-rmdir` for removing a directory.
 
