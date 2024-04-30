@@ -20,7 +20,7 @@ hadoop fs -cat /data/output/part-r-00000
 ## B) Power consumption of households
 The Map-Reduce Framework under mapreduce.Job: Counters will return
 
-bash~~~
+~~~bash
 Map input records=9
 Map output records=8
 Map output bytes=184
