@@ -1,16 +1,23 @@
 ## ZOOKEEPER installation
-1. download and install zookeeper in each node.
+1. Download and install zookeeper in each node.
 ~~~bash
 wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.4/apache-zookeeper-3.8.4-bin.tar.gz
 tar -zxzf apache-zookeeper-3.8.4-bin.tar.gz
 mv apache-zookeeper-3.8.4-bin /opt/zookeeper
+mkdir -p /opt/zookeeper/data
 ~~~
 
-2. configuration.
+2. Make sure /etc/hosts in each node contains information below:
+~~~bash
+    192.168.1.114	rpi0
+    192.168.1.115	rpi1
+    192.168.1.116	rpi2
+    192.168.1.117	rpi3
+~~~
+
+3. Configure ZooKeeper by editing the conf/zoo.cfg file, an create server ID in the folder we just created.
     - zoo.cfg
     ~~~bash
-    mkdir -p /opt/zookeeper/data
-    
     cd /opt/zookeeper/conf
     cp zoo_sample.cfg zoo.cfg
     nano zoo.cfg
@@ -24,7 +31,6 @@ mv apache-zookeeper-3.8.4-bin /opt/zookeeper
     server.3=rpi2:2888:3888
     server.4=rpi3:2888:3888
     ~~~
-    replace rpi0,rpi1,rpi2,rpi3 with 0.0.0.0 in each node
 
     - myid
     ~~~bash
@@ -32,9 +38,15 @@ mv apache-zookeeper-3.8.4-bin /opt/zookeeper
     ~~~
     use 1/2/3/4 for rpi0/1/2/3 
 
-3. start zookeeper.
+4. Start zookeeper and check the status.
 ~~~bash
 cd /opt/zookeeper/bin
 ./zkServer.sh start
 ./zkServer.sh status
+~~~
+It will show Mode: leader or Mode: follower if it's running properly.
+
+5. Remember to stop Zookeeper after finishing the exercises.
+~~~bash
+./zkServer.sh stop
 ~~~
