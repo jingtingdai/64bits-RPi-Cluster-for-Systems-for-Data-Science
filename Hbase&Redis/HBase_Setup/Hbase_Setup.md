@@ -70,7 +70,7 @@ export HBASE_CLASSPATH=/opt/Hadoop/etc/hadoop
 export HBASE_MANAGES_ZK=false
 ~~~
 
-- set environment variables (also need to be configured in rpi1/2/3)
+- Set environment variables (also need to be configured in rpi1/2/3)
 ~~~bash
 nano ~/.bashrc
 export HBASE_HOME=/opt/hbase
@@ -78,7 +78,7 @@ export PATH=$PATH:$HBASE_HOME/bin
 source ~/.bashrc
 ~~~
 
-- substitute all the jar package start with 'hadoop' in /opt/hbase/lib with the corresponding one which is in different version in /opt/Hadoop. For package that cannot find substitute in /opt/Hadoop, leave the original package untouched.
+- Substitute all the jar package start with 'hadoop' in /opt/hbase/lib with the corresponding one which is in different version in /opt/Hadoop. For package that cannot find substitute in /opt/Hadoop, leave the original package untouched. This is to avoid SLF4J warning about multiple bindings, where more than one SLF4J implementation is in the classpath, leading to ambiguity about which logging framework to use. It can cause unexpected logging behavior but is usually not critical.
 
 3. start hbase. Remember to start zookeeper before start hbase.
 ~~~bash
@@ -88,4 +88,17 @@ cd /opt/zookeeper/bin
 cd /opt/hbase/bin
 ./start-hbase.sh
 ~~~
-can check if successfully start via command `jps`.
+
+To check if the configuration is correct, enter `jps` on the master node the following should be present:
+- NameNode
+- SecondayNameNode
+- NodeManager
+- RessourceManager
+- JPS
+- HMaster
+
+On the worker nodes, enter `jps` on the master node the following should be present:
+- DataNode
+- NodeManager
+- JPS
+- HRegionServer

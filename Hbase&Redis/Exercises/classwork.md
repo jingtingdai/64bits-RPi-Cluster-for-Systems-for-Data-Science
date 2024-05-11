@@ -33,6 +33,8 @@ You are now ready to start the actual exercises.
     cd /opt/Hadoop/sbin
     ./start-dfs.sh
     ./start-yarn.sh
+    cd /opt/zookeeper/bin
+    ./zkServer.sh start
     cd /opt/hbase/bin
     ./start-hbase.sh
     ```
@@ -41,6 +43,13 @@ You are now ready to start the actual exercises.
     ```
     ./hbase shell
     ```
+
+    - In the HBase shell, type in `status` and return. The below information shows your HBase cluster is working correctly.
+    ```
+    hbase:001:0> status
+    1 active master, 3 backup masters, 3 servers, 0 dead, 0.0000 average load
+    Took 1.8477 seconds 
+    ``` 
 
     a) As a warmup, go through steps 3 to 10 of the “Procedure: Use HBase For the First Time” part of Section 2.2 in the HBase Reference Guide, which can be found here: [HBase Quickstart](https://hbase.apache.org/book.html#quickstart).  
        You can skip steps 1 to 4, as they only describe how to download and install HBase from scratch. You can go directly to the section “Procedure: Use HBase For the First Time”.
