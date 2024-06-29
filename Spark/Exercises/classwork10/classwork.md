@@ -47,6 +47,5 @@ You are now ready to do the exercise, which (again) involves running a Jupyter n
 
 1. Download the notebook `SparkDemo.ipynb` (or, if using Spark locally, `SparkDemo.html`) and the files `2015-summary.csv` & `data.tar.gz` from OLAT and follow the instructions above to get it up and running. Then follow the instructions in the notebook. During this introduction to Spark, you will learn about Spark in a more general (offline) context as well as in the context of a streaming application.
 
-**Note**: put data files to HDFS using command `hdfs dfs -put /path/to/file /data` and using them in jupyter notebook with path `hdfs://rpi0:8020/data/xxx.csv`
 
 
