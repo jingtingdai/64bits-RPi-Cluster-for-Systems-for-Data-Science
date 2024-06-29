@@ -35,7 +35,7 @@ For this exercise, we are using Raspberry Pi (RPi) clusters. Essentially, there 
     ```
     cd /opt/spark
     source myjupyterenv/bin/activate
-    jupyter lab --ip=10.42.0.250
+    jupyter lab --ip=192.168.1.114
     ```
     it would return a URL that you can use in browser to get into the JupyterLab, plus you can also check about Spark in `http://rpi0:8080`
 
@@ -46,23 +46,7 @@ unzip ml-20m.zip
 hdfs dfs -put ml-20m /data/
 ```
 
-4. Once all of the steps described above have been completed, you are ready to start the actual exercise, which can be found here: [Exercise](https://github.com/DocSeven/PiCluster/tree/master/Exercises). Some changes that need to be taken in the jupyter notebook:
-    - substitute the file path to `hdfs://rpi0:8020/data/ml-20m/xxx.csv` 
-
-    - when start a spark session, using code:
-    ```
-    import os
-    os.environ["JAVA_HOME"] = "/usr/lib/jvm/jdk-11.0.21+9"
-    os.environ["SPARK_HOME"] = "/opt/spark"
-
-    from pyspark.sql import SparkSession
-
-    spark = SparkSession.builder \
-        .master("spark://rpi0:7077") \
-        .appName("MovieLens") \
-        .getOrCreate()
-    sc = spark.sparkContext
-    ```
+4. Once all of the steps described above have been completed, you are ready to start the actual exercise, which can be found here: [Exercise](https://github.com/DocSeven/PiCluster/tree/master/Exercises). 
 
 
     
