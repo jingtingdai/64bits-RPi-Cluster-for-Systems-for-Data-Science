@@ -33,7 +33,7 @@ source ~/.bashrc
     cp spark-env.sh.template spark-env.sh
     nano spark-env.sh
     export SPARK_MASTER_HOST=rpi0
-    export JAVA_HOME=/usr/lib/jvm/jdk-11.0.21+9
+    export JAVA_HOME=/usr/lib/jvm/zulu8.78.0.19-ca-jdk8.0.412-linux_aarch64
     ~~~
 
     - workers
