@@ -1,9 +1,9 @@
 # Classwork 7
 
 ## A) Exploring WordCount
-Fro the master node, start HDFS and YARN. Create a data directory in HDFS and then upload a text file (for example README.txt under $HADOOP_HOME). Follow the [File System Shell Guide](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/FileSystemShell.html) or upload directly under `Utilities - Browse the file system` through the GUI on http://rpi0:9870/.
+Start HDFS and YARN in the master node. Create a data directory in HDFS and then upload a text file (for example README.txt under $HADOOP_HOME). Follow the [File System Shell Guide](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/FileSystemShell.html) or upload directly under `Utilities - Browse the file system` through the GUI on http://rpi0:9870/.
 
-Test a simple WordCount Application on the text file, the output data will be stored in a directory named `output`.
+Test a simple WordCount Application on the text file (run the following code inside /opt/Haoop), the output data will be stored in a directory named `output`.
 
 ~~~bash
 bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.6.jar wordcount /data/README.txt /data/output
