@@ -74,7 +74,7 @@ You are now ready to start the actual exercises.
     ```
     After installation, we can now start creating producers/consumers and processing streams of data with Python. In this exercise, we will build some of the functionality shown on the lecture slides.
 
-    **Note**: substitute all the `localhost` to `rpi0`
+    **Note**: substitute all the `localhost` to `rpi0` (use rpi0 as producer for all)
 
     - On OLAT, there are two folders (compressed in a zip-file) with Python files for accessing Kafka. The one named `kafka_example` contains a small example for a temperature data processing pipeline where there is only one producer/consumer pair. The producer writes the input data line by line as events into the topic `temperature`, the consumer subscribes the topic and and, in turn, passes the messages through three operators (converting the temperature value from Celsius to Fahrenheit, adding some noise, and finally rounding the value).
 
