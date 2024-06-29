@@ -12,10 +12,10 @@ bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.6.jar wordco
 During the program execution, a url to track the job and the MapReduce progress will be provided. Check the result by cat file `part-r-00000` in the output directory. 
 
 ## B) Power consumption of households
-Download the csv file and the Java source code. Upload csv file to the HDFS data directory and save the source code to a new directory. Compile the code into Java classes with the javac command.
+Download the csv file and the Java source code. Upload csv file to the HDFS data directory and compile the code into Java classes in the local file system with the javac command (Start with the DateConsumptionWritable file, then move to the PowerConsumptionMapper class and PowerConsumptionReducer class, finally the main class).
 
 ~~~bash
-javac -classpath `hadoop classpath` -d output_classes src/com/example/hadoop/*.java
+javac -classpath "$(hadoop classpath):/output_classes" -d output_classes /path/to/javaFile.java
 ~~~
 
 Create the Jar file with the jar command.
@@ -25,6 +25,6 @@ jar -cvf PowerConsumptionAnalysis.jar -C output_classes/ .
 
 Run the jar command.
 ~~~bash
-hadoop jar $HADOOP_HOME/project-root/PowerConsumptionAnalysis.jar com.example.hadoop.Main /data/power_consumption.csv /data/power_output
+hadoop jar PowerConsumptionAnalysis.jar com.example.hadoop.Main /data/power_consumption.csv /data/power_output
 ~~~
 In mapreduce.Job: Counters, how many records are in Map input, Map output, Reduce input and Reduce output? What does Reduce input groups represent?
