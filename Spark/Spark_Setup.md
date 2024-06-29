@@ -56,7 +56,7 @@ source ~/.bashrc
     ~~~
     Can check spark in http://rpi0:8080.
 
-5. can run a simply python script to test spark.
+5. can run a simply python script to test spark in rpi0.
 ~~~bash
 pyspark --master spark://rpi0:7077
 ~~~
