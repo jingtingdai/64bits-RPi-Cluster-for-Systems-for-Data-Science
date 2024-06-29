@@ -4,7 +4,8 @@
 
     - **As a small Exercise**, now group the data according to the country of origins and count the number of flights from every country. Output the top three countries, i.e., the three countries with the most outbound flights. Hint: if you want to sort in descending order, you need an additional parameter:`ascending=False`, e.g.
     ```
-    flightData2015.sort("count", ascending=False).topOutbound = flightData2015.groupBy("ORIGIN_COUNTRY_NAME").sum("count").sort('sum(count)', ascending=False)
+    flightData2015.sort("count", ascending=False)
+    topOutbound = flightData2015.groupBy("ORIGIN_COUNTRY_NAME").sum("count").sort('sum(count)', ascending=False)
     topOutbound.show(3)
     ```
 
