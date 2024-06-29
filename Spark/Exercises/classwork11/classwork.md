@@ -18,9 +18,9 @@ For this exercise, we are using Raspberry Pi (RPi) clusters. Essentially, there 
 
     - The RPis in the clusters are powered over Ethernet (PoE), which means that you only have to plug in the switch. You need to wait a bit until all RPis have booted. Before continuing, you may also have to connect to each RPi via SSH in turn:
     `
-    ssh pi@10.42.0.25x
+    ssh pi@192.168.1.11x
     `
-    (where x=0, 1, 2, and 3. The password is raspberry)
+    (where x=4, 5, 6 and 7. The password is raspberry)
 
 2. Start Spark and jupyterLab.
     - Start Hadoop and Spark.
@@ -40,7 +40,7 @@ For this exercise, we are using Raspberry Pi (RPi) clusters. Essentially, there 
     ```
     cd /opt/spark
     source myjupyterenv/bin/activate
-    jupyter lab --ip=10.42.0.250
+    jupyter lab --ip=192.168.1.114
     ```
     it would return a URL that you can use in browser to get into the JupyterLab, plus you can also check about Spark in `http://rpi0:8080`
 
