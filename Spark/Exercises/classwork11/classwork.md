@@ -59,21 +59,3 @@ hdfs dfs -put iris.csv /data/
 [Pima Indians Diabetes Database](https://www.kaggle.com/uciml/pima-indians-diabetes-database)
 about diagnostically predicting whether a patient has diabetes or not. Create your own Jupyter notebook and use the techniques employed in the iris-notebook (or any other technique you want to try out) to build a logistic regression classifier for the diabetes dataset.
 
-### Note
-Some changes that need to be taken in the jupyter notebook:
-- substitute the file path to `hdfs://rpi0:8020/data/xxx.csv` 
-
-- when start a spark session, using code:
-    ```
-    import os
-    os.environ["JAVA_HOME"] = "/usr/lib/jvm/jdk-11.0.21+9"
-    os.environ["SPARK_HOME"] = "/opt/spark"
-
-    from pyspark.sql import SparkSession
-
-    spark = SparkSession.builder \
-        .master("spark://rpi0:7077") \
-        .appName("MyApp") \
-        .getOrCreate()
-    sc = spark.sparkContext
-    ```
