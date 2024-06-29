@@ -1,4 +1,5 @@
 package com.example.hadoop;
+import com.example.hadoop.DateConsumptionWritable;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
