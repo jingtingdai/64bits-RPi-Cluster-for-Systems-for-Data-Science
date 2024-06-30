@@ -13,7 +13,7 @@ We use the same static IP settings from RPiSetup section as in the table below.
 
 As of March 2024, Hadoop version 3.3 and upper only supports Java 8 and Java 11 (runtime only) according to the [Hadoop wiki](https://cwiki.apache.org/confluence/display/HADOOP/Hadoop+Java+Versions). However, the default JDK installed in Debian 12 Bookworm is JDK 17 as stated from the [Debian wiki](https://wiki.debian.org/Java). Therefore, we need to manually download and install Java 8 to ensure Hadoop operates correctly.
 
-1. transfer the file provided in the git repository to raspberry pi node, extract and move java to target directory.
+1. transfer the java file to all the raspberry pi node, extract and move java to target directory.(We use this java file:[java8](https://drive.google.com/file/d/1WDkKG6NH4qPdqQxCS1x1dMR3S-1SeeQI/view?usp=drive_link))
 ~~~bash
 tar -zxvf zulu8.78.0.19-ca-jdk8.0.412-linux_aarch64.tar.gz
 sudo mkdir -p /usr/lib/jvm
