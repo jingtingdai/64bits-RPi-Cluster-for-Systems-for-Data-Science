@@ -4,16 +4,11 @@
 For this exercise, we use two NoSQL systems: Redis and HBase. We would provide raspberry pi cluster with Redis and Hbase installed to finish this exercise. However, if you want to install them directly on your system, this is also possible. In this case, you have to go to [Redis Download](https://redis.io/download) or [HBase Download](https://www.apache.org/dyn/closer.lua/hbase/), respectively, and follow the instructions given there. (Some Linux distributions offer a Redis package that you can install.)
 
 - Start the raspberry pi cluster.
-    - In order to get started, you need to connect the cluster via the Ethernet cable to your machine. The setup we use is to create a private network (usually used for sharing WiFi with other machines over Ethernet). The RPis in the cluster have fixed IP-addresses in the network 10.42.0.0/24: 10.42.0.250 (master), 10.42.0.251, 10.42.0.252, and 10.42.0.253. If the wired network created by you uses another address space, you have to change it to the address space 10.42.0.0./24. Network settings can be found here:
-        - MacOS: under System Preferences → Internet and Network
 
-        - Windows: under Settings → Network \& Internet
-
-    - The RPis in the clusters are powered over Ethernet (PoE), which means that you only have to plug in the switch. You need to wait a bit until all RPis have booted. Before continuing, you may also have to connect to each RPi via SSH in turn:
     `
-    ssh pi@10.42.0.25x
+    ssh pi@192.168.1.11x
     `
-    (where x=0, 1, 2, and 3. The password is raspberry)
+    (where x=4, 5, 6, and 7 for rpi0, rpi1, rpi2, rpi3. The password is raspberry)
 
 
 You are now ready to start the actual exercises.
@@ -28,13 +23,15 @@ You are now ready to start the actual exercises.
     There is similar code on pages 15, 16, and 17. Just skip these parts.
 
 2. In the second exercise, we work with HBase. Start Hbase with following code:
-    - in every nodes:
+    - start zookeeper in all the nodes, start hadoop and hbase in rpi0:
     ```
     cd /opt/Hadoop/sbin
     ./start-dfs.sh
     ./start-yarn.sh
+    
     cd /opt/zookeeper/bin
     ./zkServer.sh start
+
     cd /opt/hbase/bin
     ./start-hbase.sh
     ```
@@ -162,10 +159,7 @@ You are now ready to start the actual exercises.
     - Now populate the table wiki_small with data using the ImportTsv utility of HBase by running the following command.
     ```
     hbase org.apache.hadoop.hbase.mapreduce.ImportTsv \
-    -Dimporttsv.separator=, -Dimporttsv.columns="HBASE_ROW_KEY, \
-    page:page_title,page:page_ns,page:revision_id, \
-    author:timestamp,author:contributor_id, \
-    author:contributor_name,page:bytes" \
+    -Dimporttsv.separator=, -Dimporttsv.columns="HBASE_ROW_KEY,page:page_title,page:page_ns,page:revision_id,author:timestamp,author:contributor_id,author:contributor_name,page:bytes" \
     wiki_small hdfs://rpi0:8020/hbase/enwiki-20200920-pages-articles-multistream_small.csv
     ```
 

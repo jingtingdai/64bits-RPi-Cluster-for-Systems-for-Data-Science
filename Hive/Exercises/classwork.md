@@ -3,16 +3,11 @@
 This exercise uses Hive, which is part of the Hadoop framework and is a distributed data warehouse built on top of HDFS. In order to get everything up and running, you need to start the raspberry pi cluster we offered first.
 
 1. Start the raspberry pi cluster.
-    - In order to get started, you need to connect the cluster via the Ethernet cable to your machine. The setup we use is to create a private network (usually used for sharing WiFi with other machines over Ethernet). The RPis in the cluster have fixed IP-addresses in the network 10.42.0.0/24: 10.42.0.250 (master), 10.42.0.251, 10.42.0.252, and 10.42.0.253. If the wired network created by you uses another address space, you have to change it to the address space 10.42.0.0./24. Network settings can be found here:
-        - MacOS: under System Preferences → Internet and Network
 
-        - Windows: under Settings → Network \& Internet
-
-    - The RPis in the clusters are powered over Ethernet (PoE), which means that you only have to plug in the switch. You need to wait a bit until all RPis have booted. Before continuing, you may also have to connect to each RPi via SSH in turn:
     `
-    ssh pi@10.42.0.25x
+    ssh pi@192.168.1.11x
     `
-    (where x=0, 1, 2, and 3. The password is raspberry)
+    (where x=4, 5, 6, and 7 for rpi0, rpi1, rpi2, rpi3. The password is raspberry)
 
 2. Start Hadoop and Hive.
     - in rpi0:
@@ -20,6 +15,7 @@ This exercise uses Hive, which is part of the Hadoop framework and is a distribu
     cd /opt/Hadoop/sbin
     ./start-dfs.sh
     ./start-yarn.sh
+
     nohup hive --service metastore &
     nohup hive --service hiveserver2 &
     beeline
@@ -38,7 +34,7 @@ CREATE DATABASE IF NOT EXISTS testdb;
 ```
 !run employee_table.hql
 ```
-also remember to substitute `namenode` with `rpi0` in the hql file.
+
 
 6.  Load the content of the table (`employee.csv`) into HDFS:
 ```
@@ -76,7 +72,7 @@ SET hive.mapred.mode=nonstrict;
 
 
 1. 
-    - Create the tables `order_item`, `orders`, and `products` with the files found in the directory `employee`. The file `line_item.hql` contains the schema definition of the tables and the location of the content files. (also remember to substitute `namenode` with `rpi0` in the hql file.)
+    - Create the tables `order_item`, `orders`, and `products` with the files found in the directory `employee`. The file `line_item.hql` contains the schema definition of the tables and the location of the content files. 
 
     - Next you need to copy the csv-files to HDFS. When you check the file `line_item.hql`, you will see that rather than specifying a file, the content is specified via a directory. That means, you may have to first create subdirectories `order_item`, `orders`, and `products` (if they have not been created by `line_item.hql`) and then copy the csv-files into the corresponding directory.
 

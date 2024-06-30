@@ -12,17 +12,10 @@ cluster:
 
 - Start the raspberry pi cluster.
 
-    - In order to get started, you need to connect the cluster via the Ethernet cable to your machine. The setup we use is to create a private network (usually used for sharing WiFi with other machines over Ethernet). The RPis in the cluster have fixed IP-addresses in the network 10.42.0.0/24: 10.42.0.250 (master), 10.42.0.251, 10.42.0.252, and 10.42.0.253. If the wired network created by you uses another address space, you have to change it to the address space 10.42.0.0./24. Network settings can be found here:
-
-        - MacOS: under System Preferences → Internet and Network
-
-        - Windows: under Settings → Network & Internet
-
-    - The RPis in the clusters are powered over Ethernet (PoE), which means that you only have to plug in the switch. You need to wait a bit until all RPis have booted. Before continuing, you may also have to connect to each RPi via SSH in turn (to accept the SSH-keys of all RPis, needed to run ansible scripts):
-    ```
-    ssh pi@10.42.0.25x
-    ```
-    where x=0, 1, 2, and 3. The password is `raspberry`
+    `
+    ssh pi@192.168.1.11x
+    `
+    (where x=4, 5, 6, and 7 for rpi0, rpi1, rpi2, rpi3. The password is raspberry)
 
 - Start Kafka in each node.
 ```
@@ -74,11 +67,10 @@ You are now ready to start the actual exercises.
     ```
     After installation, we can now start creating producers/consumers and processing streams of data with Python. In this exercise, we will build some of the functionality shown on the lecture slides.
 
-    **Note**: substitute all the `localhost` to `rpi0` (use rpi0 as producer for all)
 
     - On OLAT, there are two folders (compressed in a zip-file) with Python files for accessing Kafka. The one named `kafka_example` contains a small example for a temperature data processing pipeline where there is only one producer/consumer pair. The producer writes the input data line by line as events into the topic `temperature`, the consumer subscribes the topic and and, in turn, passes the messages through three operators (converting the temperature value from Celsius to Fahrenheit, adding some noise, and finally rounding the value).
 
-        In order to run the Python code, first make sure your Zookeeper and Kafka are up and running, then open two consoles and run both scripts (start the consumer first). You can then observe the producer and consumer process the individual messages.
+        In order to run the Python code, first make sure your Zookeeper and Kafka are up and running, then open two consoles(2 nodes, rpi0 used as producer) and run both scripts (start the consumer first). You can then observe the producer and consumer process the individual messages.
 
     - The `kafka_chaining` folder has more than one pair of producers and consumers. It is still a temperature processing pipeline with similar operators as in the kafka example folder. However, this time you are building a more complex structure: the temperatures are converted from Celsius to Fahrenheit, then filtered by a threshold, after which the events are split into two streams, one stream is passed through EWMA and another through Avg. We provide example code for one stateless operator(`celsius_to_fahrenheit`), one stateful operator (EWMA), and one output consumer of EWMA. Your task is to fill in/replace code to make this work. Currently, there is some placeholder code that just passes through the events without processing them. In particular, you should finish another stateless operator, stateful operator, and output consumer of moving average.
 

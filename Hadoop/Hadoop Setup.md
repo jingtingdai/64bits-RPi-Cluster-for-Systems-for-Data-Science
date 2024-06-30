@@ -8,88 +8,71 @@ We use the same static IP settings from RPiSetup section as in the table below.
 | slave         | rpi2          | 192.168.1.116  |
 | slave         | rpi3          | 192.168.1.117  |
 
-## Set up Passwordless SSH
-1. On each node, install OpenSSH Server
-~~~bash
-sudo apt install ssh pdsh openssh-server openssh-client
-~~~
-2. Generate SSH keys on each node. (Press enter to accept the default file location and press enter to leave the passphrase blank for no passphrase)
-~~~bash
-ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-~~~
-3. Copy the public key to every node include itself.
-~~~bash
-ssh-copy-id username@hostname # For example, pi@rpi0
-~~~
-4. Check if there is 4 public keys inside ~/.ssh/authorized_keys file and try to SSH into the target node.
-~~~bash
-ssh username@hostname
-~~~
 
 ## Install Java
 
 As of March 2024, Hadoop version 3.3 and upper only supports Java 8 and Java 11 (runtime only) according to the [Hadoop wiki](https://cwiki.apache.org/confluence/display/HADOOP/Hadoop+Java+Versions). However, the default JDK installed in Debian 12 Bookworm is JDK 17 as stated from the [Debian wiki](https://wiki.debian.org/Java). Therefore, we need to manually download and install Java 8 to ensure Hadoop operates correctly.
 
-1. Download and install the 64-bit OpenJDK 8 from Debian archive.
+1. transfer the file provided in the git repository to raspberry pi node, extract and move java to target directory.
 ~~~bash
-wget http://ftp.us.debian.org/debian/pool/main/o/openjdk-8/openjdk-8-jdk-headless_8u402-ga-2+b1_arm64.deb
-wget http://ftp.us.debian.org/debian/pool/main/o/openjdk-8/openjdk-8-jre-headless_8u402-ga-2+b1_arm64.deb
+tar -zxvf zulu8.78.0.19-ca-jdk8.0.412-linux_aarch64.tar.gz
+sudo mkdir -p /usr/lib/jvm
+sudo mv zulu8.78.0.19-ca-jdk8.0.412-linux_aarch64 /usr/lib/jvm/
+~~~
 
-sudo dpkg -i *.deb
-~~~
-2. Set OpenJDK 8 as the default JAVA version. These commands show the list of all Java versions installed on your machine, set the one as default by entering the selection number.
+2. Configure java.
 ~~~bash
-sudo update-alternatives --config java
-sudo update-alternatives --config javac
+sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/zulu8.78.0.19-ca-jdk8.0.412-linux_aarch64/bin/java 1
+sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/zulu8.78.0.19-ca-jdk8.0.412-linux_aarch64/bin/javac 1 
 ~~~
-3. Verify the installation.
+
+3. Check if successfully installed.
 ~~~bash
 java -version
 ~~~
 
-4. Set the the Java directory to environment variables. Add the path to the end of .bashrc file.
+4. Set the environment variables.
 ~~~bash
 nano ~/.bashrc
-export JAVA_HOME=/usr/lib/jvm/<java_directory>
+export JAVA_HOME=/usr/lib/jvm/zulu8.78.0.19-ca-jdk8.0.412-linux_aarch64
 export PATH=$PATH:$JAVA_HOME/bin
 source ~/.bashrc
 ~~~
 
 ## Install Hadoop
-1. Manually download 64-bit binary Hadoop 3.3.6 on each raspberry pi node.
+1. Manually download Hadoop 3.3.6 64bit and transfer the file into each raspberry pi node.
 ~~~bash
 wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-3.3.6-aarch64.tar.gz
 ~~~
-2. Extract hadoop and move to target directory. (substitute <hadoop_archive_file>/ <hadoop_version_directory> with your own hadoop directory name)
+
+2. Extract hadoop and move to target directory. 
 ~~~bash
-tar -zxvf <hadoop_archive_file>.tar.gz
-sudo mv <hadoop_version_directory> /opt/Hadoop
+tar -zxvf hadoop-3.3.6-aarch64.tar.gz
+sudo mv hadoop-3.3.6 /opt/Hadoop
 ~~~
+
 3. Set the environment variables.
 ~~~bash
 nano ~/.bashrc
 export HADOOP_HOME=/opt/Hadoop
-export HADOOP_CONF_DIR=${HADOOP_HOME}/etc/hadoop
 export PATH=$PATH:$HADOOP_HOME/bin
+export HADOOP_CONF_DIR=${HADOOP_HOME}/etc/hadoop
 export PDSH_RCMD_TYPE=ssh
 source ~/.bashrc
 ~~~
-4. Verify the installation.
+
+4. Check if successfully installed.
 ~~~bash
 hadoop version
 ~~~
 
 ### Configure Hadoop in each node
-Go to the configuration directory
-~~~bash
-cd $HADOOP_CONF_DIR
-~~~ 
-
+Go to the configuration directory using ```cd $HADOOP_CONF_DIR```
 - hadoop-env.sh (make ‘logs’ directory in /opt/Hadoop)
 ~~~bash
-export JAVA_HOME=/usr/lib/jvm/<java_directory>
+export JAVA_HOME=/usr/lib/jvm/zulu8.78.0.19-ca-jdk8.0.412-linux_aarch64
 export HADOOP_HOME=/opt/Hadoop
+export HADOOP_CONF_DIR=${HADOOP_HOME}/etc/hadoop
 export HADOOP_LOG_DIR=${HADOOP_HOME}/logs 
 ~~~
 
@@ -138,7 +121,7 @@ export HADOOP_LOG_DIR=${HADOOP_HOME}/logs
     ~~~bash
       <property>
         <name>dfs.datanode.data.dir</name>
-        <value>/opt/Hadoop/data/datanode</value>
+        <value>>/opt/Hadoop/data/datanode</value>
       </property>
       <property>
         <name>dfs.replication</name>
@@ -163,9 +146,10 @@ export HADOOP_LOG_DIR=${HADOOP_HOME}/logs
         <value>mapreduce_shuffle</value>
       </property>
       <property>
-        <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
+        <name>yarn.nodemanager.aux-services.mapreduce_shuffle.class</name>
         <value>org.apache.hadoop.mapred.ShuffleHandler</value>
       </property>
+
     ~~~
 
     - rpi1,rpi2,rpi3: 
@@ -191,7 +175,7 @@ export HADOOP_LOG_DIR=${HADOOP_HOME}/logs
         <value>mapreduce_shuffle</value>
       </property>
       <property>
-        <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
+        <name>yarn.nodemanager.aux-services.mapreduce_shuffle.class</name>
         <value>org.apache.hadoop.mapred.ShuffleHandler</value>
       </property>
     ~~~
@@ -218,15 +202,15 @@ pi@rpi3
     <value>0.0.0.0:19888</value>
   </property>
   <property>
-    <name>yarn.app.mapreduce.am.env</name>
-    <value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
-  </property>
-  <property>
     <name>mapreduce.map.env</name>
     <value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
   </property>
   <property>
     <name>mapreduce.reduce.env</name>
+    <value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
+  </property>
+  <property>
+    <name>yarn.app.mapreduce.am.env</name>
     <value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
   </property>
 ~~~
@@ -246,12 +230,13 @@ change line '127.0.0.1   rpix' to:
     192.168.1.117	rpi3
 ~~~
 
-### Prepare and boot HDFS and YARN
-From the master node(rpi0), format the NameNode and start HDFS and YARN.
-
+### format the namenode in rpi0
 ~~~bash
 hdfs namenode -format
-cd $HADOOP_HOME/sbin
+~~~
+
+### start Hadoop service in /opt/Hadoop/sbin of rpi0
+~~~bash
 ./start-dfs.sh
 ./start-yarn.sh
 ~~~
@@ -259,7 +244,6 @@ cd $HADOOP_HOME/sbin
 To check if the configuration is correct, enter `jps` on the master node the following should be present:
 - NameNode
 - SecondayNameNode
-- NodeManager
 - RessourceManager
 - JPS
 

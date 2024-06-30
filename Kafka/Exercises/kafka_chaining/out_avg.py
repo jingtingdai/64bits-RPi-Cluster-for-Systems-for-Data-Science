@@ -1,0 +1,1 @@
+# TO DO: Write an output consumer for moving average.

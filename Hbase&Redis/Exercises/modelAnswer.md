@@ -12,9 +12,15 @@
   Rows are sorted lexicographically (not numerically) by row key, in our case by `page_id`. In order to get numerical order, the keys would have to be padded, otherwise e.g. 10 is lexicographically smaller than 2.
 
   - 
-    - A. `scan 'wiki_small', {COLUMNS => ['page:page_title', 'author:contributor_name'], ROWPREFIXFILTER => '1977'}`
+    - A. 
+    ```
+    scan 'wiki_small', {COLUMNS => ['page:page_title', 'author:contributor_name'], ROWPREFIXFILTER => '1977'}
+    ```
 
-    - B. `scan 'wiki_small', {COLUMNS => ['page:page_title', 'author:contributor_name'], FILTER => "SingleColumnValueFilter('author', 'contributor_name', =, 'substring:tom')"}`
+    - B. 
+    ```
+    scan 'wiki_small', {COLUMNS => ['page:page_title', 'author:contributor_name'], FILTER => "SingleColumnValueFilter('author', 'contributor_name', =, 'substring:tom')"}
+    ```
   
   - 
     - A. For a quick test, let us return the first five results:
@@ -27,7 +33,10 @@
       scan 'wiki_small', {COLUMNS => 'author:timestamp', FILTER => "ValueFilter(=, 'substring:2017')"}
       ```
       
-    - B. `scan 'wiki_small', {COLUMNS => 'page:page_title', FILTER => "ValueFilter(=, 'substring:Sydney')"}`
+    - B. 
+    ```
+    scan 'wiki_small', {COLUMNS => 'page:page_title', FILTER => "ValueFilter(=, 'substring:Sydney')"}
+    ```
       
       which returns 280 rows. Another formulation of the query is
       ```

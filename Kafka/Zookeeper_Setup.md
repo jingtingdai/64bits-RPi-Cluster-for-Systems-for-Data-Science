@@ -24,7 +24,7 @@ sudo mv apache-zookeeper-3.8.4-bin /opt/zookeeper
     server.3=rpi2:2888:3888
     server.4=rpi3:2888:3888
     ~~~
-    replace rpi0,rpi1,rpi2,rpi3 with 0.0.0.0 in each node
+    replace rpi0,rpi1,rpi2,rpi3 with 0.0.0.0 in each node (for example, 'server.1=0.0.0.0:2888:3888 server.2=rpi1:2888:3888 server.3=rpi2:2888:3888 server.4=rpi3:2888:3888' for rpi0)
 
     - myid
     ~~~bash

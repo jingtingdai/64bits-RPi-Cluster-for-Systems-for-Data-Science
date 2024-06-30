@@ -21,10 +21,12 @@ source ~/.bashrc
     cd /opt/spark/conf
     cp spark-defaults.conf.template spark-defaults.conf
     nano spark-defaults.conf
+
     spark.master                     spark://rpi0:7077
     spark.eventLog.enabled           true
     spark.eventLog.dir               hdfs://rpi0:8020/sparkEventLog
     spark.serializer                 org.apache.spark.serializer.KryoSerializer
+
     hdfs dfs -mkdir /sparkEventLog
     ~~~
 
@@ -32,6 +34,7 @@ source ~/.bashrc
     ~~~bash
     cp spark-env.sh.template spark-env.sh
     nano spark-env.sh
+    
     export SPARK_MASTER_HOST=rpi0
     export JAVA_HOME=/usr/lib/jvm/zulu8.78.0.19-ca-jdk8.0.412-linux_aarch64
     ~~~
@@ -40,6 +43,7 @@ source ~/.bashrc
     ~~~bash
     cp workers.template workers
     nano workers
+
     pi@rpi1
     pi@rpi2
     pi@rpi3

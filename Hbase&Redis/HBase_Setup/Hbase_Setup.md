@@ -7,7 +7,7 @@ sudo mv hbase-2.5.8-hadoop3 /opt/hbase
 ~~~
 
 2. configuration in rpi0.
-- hbase-site.xml
+- hbase-site.xml (delete all the old properties in the file)
 ~~~bash
 hdfs dfs -mkdir /hbase
 cd /opt/hbase/conf
@@ -64,7 +64,7 @@ pi@rpi3
 - hbase-env.sh (also need to be configured in rpi1/2/3)
 ~~~bash
 nano hbase-env.sh
-export JAVA_HOME=/usr/lib/jvm/jdk-11.0.21+9
+export JAVA_HOME=/usr/lib/jvm/zulu8.78.0.19-ca-jdk8.0.412-linux_aarch64
 export HADOOP_HOME=/opt/Hadoop
 export HBASE_CLASSPATH=/opt/Hadoop/etc/hadoop
 export HBASE_MANAGES_ZK=false
@@ -78,9 +78,11 @@ export PATH=$PATH:$HBASE_HOME/bin
 source ~/.bashrc
 ~~~
 
-- Substitute all the jar package start with 'hadoop' in /opt/hbase/lib with the corresponding one which is in different version in /opt/Hadoop. For package that cannot find substitute in /opt/Hadoop, leave the original package untouched. This is to avoid SLF4J warning about multiple bindings, where more than one SLF4J implementation is in the classpath, leading to ambiguity about which logging framework to use. It can cause unexpected logging behavior but is usually not critical.
+- Substitute all the jar package start with 'hadoop' in /opt/hbase/lib with the corresponding one which is in different version in /opt/Hadoop and also substitute all the jar package start with 'zookeeper' with those in /opt/zookeeper/lib in all the nodes. For package that cannot find substitute in /opt/Hadoop, leave the original package untouched. This is to avoid SLF4J warning about multiple bindings, where more than one SLF4J implementation is in the classpath, leading to ambiguity about which logging framework to use. It can cause unexpected logging behavior but is usually not critical.
 
-3. start hbase. Remember to start zookeeper before start hbase.
+- copy hdfs-site.xml in /opt/Hadoop/etc/hadoop to /opt/hbase/conf in all the nodes.
+
+3. start hbase. Remember to start zookeeper before start hbase. (start zookeeper in all the nodes and start hbase in rpi0)
 ~~~bash
 cd /opt/zookeeper/bin
 ./zkServer.sh start
@@ -92,7 +94,6 @@ cd /opt/hbase/bin
 To check if the configuration is correct, enter `jps` on the master node the following should be present:
 - NameNode
 - SecondayNameNode
-- NodeManager
 - RessourceManager
 - JPS
 - HMaster
