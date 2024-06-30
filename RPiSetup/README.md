@@ -47,4 +47,19 @@ sudo nmcli c down "Wired connection 1" && sudo nmcli c up "Wired connection 1"
 sudo reboot
 ~~~
 
+## set up passwordless SSH among the rpi nodes
+1. Generate SSH keys on each node. (Press enter to accept the default file location and press enter to leave the passphrase blank for no passphrase)
+~~~bash
+ssh-keygen -t rsa
+~~~
+2. Copy the public key to every node include itself.
+~~~bash
+ssh-copy-id pi@hostname
+~~~
+3. Check if there is 4 public keys inside ~/.ssh/authorized_keys file and try to SSH into the target node.
+~~~bash
+ssh pi@hostname
+~~~
+
+
 The basic set up is now completed. Try to ssh to each RPi using the configured static ip address with `ssh [username]@[ip address]`, it should work the same as `ssh [username]@[hostname].local`.
