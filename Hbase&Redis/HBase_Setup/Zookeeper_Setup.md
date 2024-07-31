@@ -9,10 +9,10 @@ mkdir -p /opt/zookeeper/data
 
 2. Make sure /etc/hosts in each node contains information below:
 ~~~bash
-    192.168.1.114	rpi0
-    192.168.1.115	rpi1
-    192.168.1.116	rpi2
-    192.168.1.117	rpi3
+    10.42.0.250	rpi0
+    10.42.0.251	rpi1
+    10.42.0.252	rpi2
+    10.42.0.253	rpi3
 ~~~
 
 3. Configure ZooKeeper by editing the conf/zoo.cfg file, an create server ID in the folder we just created.

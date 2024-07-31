@@ -3,10 +3,10 @@ We use the same static IP settings from RPiSetup section as in the table below.
 
 |   Node        |    Hostname   | IP Address     |
 | ------------- |:-------------:| :-------------:|
-| master        | rpi0          | 192.168.1.114  |
-| slave         | rpi1          | 192.168.1.115  |
-| slave         | rpi2          | 192.168.1.116  |
-| slave         | rpi3          | 192.168.1.117  |
+| master        | rpi0          | 10.42.0.250  |
+| slave         | rpi1          | 10.42.0.251  |
+| slave         | rpi2          | 10.42.0.252  |
+| slave         | rpi3          | 10.42.0.253  |
 
 
 ## Install Java
@@ -224,10 +224,10 @@ sudo chmod 777 -R /opt/Hadoop/
 ### change /etc/hosts in each node
 change line '127.0.0.1   rpix' to:
 ~~~bash
-    192.168.1.114	rpi0
-    192.168.1.115	rpi1
-    192.168.1.116	rpi2
-    192.168.1.117	rpi3
+    10.42.0.250	rpi0
+    10.42.0.251	rpi1
+    10.42.0.252	rpi2
+    10.42.0.253	rpi3
 ~~~
 
 ### format the namenode in rpi0

@@ -20,10 +20,10 @@ Once connected, open a terminal and type `ifconfig`, look for the `inet` field u
 
 |   Node        |    Hostname   | IP Address     |
 | ------------- |:-------------:| :-------------:|
-| master        | rpi0          | 192.168.1.114  |
-| slave         | rpi1          | 192.168.1.115  |
-| slave         | rpi2          | 192.168.1.116  |
-| slave         | rpi3          | 192.168.1.117  |
+| master        | rpi0          | 10.42.0.250  |
+| slave         | rpi1          | 10.42.0.251  |
+| slave         | rpi2          | 10.42.0.252  |
+| slave         | rpi3          | 10.42.0.253  |
 
 ## Set up Static IP Address
 

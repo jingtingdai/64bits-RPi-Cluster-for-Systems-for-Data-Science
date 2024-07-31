@@ -92,7 +92,7 @@ rdd.reduce(lambda a, b: a+b)
     - start JupyterLab.
     ```
     source myjupyterenv/bin/activate
-    jupyter lab --ip=192.168.1.114
+    jupyter lab --ip=10.42.0.250
     ```
     and then you would get an URL which you can use to open the JupyterLab.
 
