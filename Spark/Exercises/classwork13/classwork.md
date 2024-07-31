@@ -27,7 +27,7 @@ For this exercise, we are using Raspberry Pi (RPi) clusters.
     ```
     cd /opt/spark
     source myjupyterenv/bin/activate
-    jupyter lab --ip=192.168.1.114
+    jupyter lab --ip=10.42.0.250
     ```
     it would return a URL that you can use in browser to get into the JupyterLab, plus you can also check about Spark in `http://rpi0:8080`
 
