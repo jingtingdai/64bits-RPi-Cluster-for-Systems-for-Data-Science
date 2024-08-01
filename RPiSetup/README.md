@@ -41,7 +41,7 @@ sudo nmcli -p connection show
 Set the static IP address. Substitute 'Wired connection 1' with the internet connection name you used, and substitute IP addresses from the previous step.
 ~~~bash
 sudo nmcli c mod "Wired connection 1" ipv4.addresses 10.42.0.25x/24 ipv4.method manual
-sudo nmcli con mod "Wired connection 1" ipv4.gateway 10.42.0.2
+sudo nmcli con mod "Wired connection 1" ipv4.gateway 10.42.0.0
 sudo nmcli con mod "Wired connection 1" ipv4.dns "8.8.8.8"
 sudo nmcli c down "Wired connection 1" && sudo nmcli c up "Wired connection 1"
 sudo reboot
