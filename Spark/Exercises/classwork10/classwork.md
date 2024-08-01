@@ -5,9 +5,9 @@ This exercise uses Apache Spark. The instruction to use raspberry pi cluster we 
 - Start the raspberry pi cluster.
 
     `
-    ssh pi@192.168.1.11x
+    ssh pi@10.42.0.25x
     `
-    (where x=4, 5, 6, and 7 for rpi0, rpi1, rpi2, rpi3. The password is raspberry)
+    (where x=0, 1, 2, and 3 for rpi0, rpi1, rpi2, rpi3. The password is raspberry)
 
 - Start Hadoop and Spark.
     - in rpi0:

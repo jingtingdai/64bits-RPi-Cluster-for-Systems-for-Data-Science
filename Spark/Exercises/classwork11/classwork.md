@@ -10,9 +10,9 @@ For this exercise, we are using Raspberry Pi (RPi) clusters.
 1. Start the raspberry pi cluster.
 
     `
-    ssh pi@192.168.1.11x
+    ssh pi@10.42.0.25x
     `
-    (where x=4, 5, 6, and 7 for rpi0, rpi1, rpi2, rpi3. The password is raspberry)
+    (where x=0, 1, 2, and 3 for rpi0, rpi1, rpi2, rpi3. The password is raspberry)
 
 2. Start Spark and jupyterLab.
     - Start Hadoop and Spark.

@@ -16,7 +16,7 @@ First of all, we flash the operating system to the SD cards. It is recommended t
 
 In this step, we will share Internet connection to the RPis through an Ethernet cable. For detailed instructions on how to do this, see [Linux](https://www.tecmint.com/share-internet-in-linux/) and [Mac](https://support.apple.com/guide/mac-help/share-internet-connection-mac-network-users-mchlp1540/mac#:~:text=Turn%20on%20Internet%20Sharing%2C%20then,internet%20over%20Ethernet%2C%20choose%20Ethernet.). 
 
-Once connected, open a terminal and type `ifconfig`, look for the `inet` field under `bridge100` option and note down the IP adress. Modify the last part of the IP address to assign host addresses for the RPis'. In my case, it's 192.168.1.1 and I will use the IP addresses as the table below for the next step.
+In my case, I will use the IP addresses as the table below for the next step.
 
 |   Node        |    Hostname   | IP Address     |
 | ------------- |:-------------:| :-------------:|
@@ -40,8 +40,8 @@ sudo nmcli -p connection show
 
 Set the static IP address. Substitute 'Wired connection 1' with the internet connection name you used, and substitute '192.168.1.11x' with IP addresses from the previous step.
 ~~~bash
-sudo nmcli c mod "Wired connection 1" ipv4.addresses 192.168.1.11x/24 ipv4.method manual
-sudo nmcli con mod "Wired connection 1" ipv4.gateway 192.168.1.1
+sudo nmcli c mod "Wired connection 1" ipv4.addresses 10.42.0.25x/24 ipv4.method manual
+sudo nmcli con mod "Wired connection 1" ipv4.gateway 10.42.0.2
 sudo nmcli con mod "Wired connection 1" ipv4.dns "8.8.8.8"
 sudo nmcli c down "Wired connection 1" && sudo nmcli c up "Wired connection 1"
 sudo reboot

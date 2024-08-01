@@ -6,9 +6,9 @@ For this exercise, we use two NoSQL systems: Redis and HBase. We would provide r
 - Start the raspberry pi cluster.
 
     `
-    ssh pi@192.168.1.11x
+    ssh pi@10.42.0.25x
     `
-    (where x=4, 5, 6, and 7 for rpi0, rpi1, rpi2, rpi3. The password is raspberry)
+    (where x=0, 1, 2, and 3 for rpi0, rpi1, rpi2, rpi3. The password is raspberry)
 
 
 You are now ready to start the actual exercises.
