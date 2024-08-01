@@ -38,7 +38,7 @@ Check the current network configuration. Look for the NAME with TYPE `ethernet` 
 sudo nmcli -p connection show
 ~~~
 
-Set the static IP address. Substitute 'Wired connection 1' with the internet connection name you used, and substitute '192.168.1.11x' with IP addresses from the previous step.
+Set the static IP address. Substitute 'Wired connection 1' with the internet connection name you used, and substitute IP addresses from the previous step.
 ~~~bash
 sudo nmcli c mod "Wired connection 1" ipv4.addresses 10.42.0.25x/24 ipv4.method manual
 sudo nmcli con mod "Wired connection 1" ipv4.gateway 10.42.0.2
