@@ -1,9 +1,9 @@
 ## KAFKA installation
 1. download and install kafka in each node.
 ~~~bash
-wget https://downloads.apache.org/kafka/3.7.0/kafka_2.13-3.7.0.tgz
-tar -zxvf kafka_2.13-3.7.0.tgz
-sudo mv kafka_2.13-3.7.0 /opt/kafka
+wget https://downloads.apache.org/kafka/3.8.0/kafka_2.13-3.8.0.tgz
+tar -zxvf kafka_2.13-3.8.0.tgz
+sudo mv kafka_2.13-3.8.0 /opt/kafka
 ~~~
 
 2. configuration in each node.
